@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  #druid配置
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/mytest?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: gycheng
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 10
+    minIdle: 10
+    maxActive: 30
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,slf4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=10
+
+  devtools:
+    livereload:
+      enabled: true
+
+
+#mybatis配置
+mybatis:
+    mapper-locations: classpath:mybatis/mapper/*.xml
+    type-aliases-package: com.gycheng.bootdemo.domain.model
+    config-locations: classpath:mybatis/mybatis-config.xml
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+#logger
+logging:
+  config: classpath:logback-spring.xml
+  path: D:/logs/bootdemo
+  level:
+    com.gycheng.bootdemo: DEBUG
+    org.springframework.web: INFO

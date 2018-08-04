@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%-1level][%F:%L] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="com.gycheng.bootdemo" level="INFO"/>
+
+    <!-- 测试环境+开发环境. 多个使用逗号隔开. -->
+    <springProfile name="dev,local,test,default">
+        <logger name="org.springframework.web" level="${logging.level.org.springframework.web}"/>
+        <logger name="com.gycheng.bootdemo" level="${logging.level.com.gycheng.bootdemo}"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+
+</configuration>
